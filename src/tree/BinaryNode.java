@@ -9,6 +9,8 @@ package tree;
 public class BinaryNode<T>
 {
     private T             data;
+
+    private BinaryNode<T> parent; // reference to parent
     private BinaryNode<T> leftChild;  // Reference to left child
     private BinaryNode<T> rightChild; // Reference to right child
 
@@ -22,6 +24,10 @@ public class BinaryNode<T>
         this(dataPortion, null, null); // Call next constructor
     } // end constructor
 
+    public BinaryNode(T dataPortion, BinaryNode p){
+        data = dataPortion;
+        parent = p;
+    }
     public BinaryNode(T dataPortion, BinaryNode<T> newLeftChild,
                       BinaryNode<T> newRightChild)
     {
@@ -43,6 +49,14 @@ public class BinaryNode<T>
     {
         data = newData;
     } // end setData
+
+    public BinaryNode<T> getParent(){
+        return parent;
+    }
+
+    public void setParent(BinaryNode<T> n){
+        parent = n;
+    }
 
     /** Retrieves the left child of this node.
      @return  A reference to this node's left child. */

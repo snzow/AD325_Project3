@@ -4,6 +4,8 @@ import tree.BinaryNode;
 import tree.BinaryTree;
 import tree.BinaryTreeInterface;
 
+import java.security.cert.X509Certificate;
+
 public class BinarySearchTree<T extends Comparable<? super T>>
         extends BinaryTree<T> implements SearchTreeInterface<T>
 {
@@ -53,6 +55,8 @@ public class BinarySearchTree<T extends Comparable<? super T>>
     {
         return getEntry(entry) != null;
     } // end contains
+
+
 
     public T add(T newEntry)
     {
@@ -143,7 +147,132 @@ public class BinarySearchTree<T extends Comparable<? super T>>
         } // end if
 
         return rootNode;
+
     } // end removeEntry
+
+    public void avlInsert(T w){
+        if(getRootNode().equals(null)){
+            setRootNode(new BinaryNode(w));
+        }
+        else if(findEntry(getRootNode(),w).equals(null)){
+            avlInsert(getRootNode(), w);
+        }
+    }
+    private void avlInsert(BinaryNode<T> n, T w){
+        if (w.compareTo(n.getData()) < 0){
+            if(!n.hasLeftChild()){
+                n.setLeftChild(new BinaryNode(w));
+                rebalance(n);
+            }
+            else{
+                avlInsert(n.getLeftChild(),w);
+                rebalance(n.getLeftChild());
+            }
+        }
+        else{
+            if(!n.hasRightChild()){
+                n.setRightChild(new BinaryNode(w));
+                rebalance(n);
+            }
+            else{
+                avlInsert(n,w);
+                rebalance(n.getRightChild());
+            }
+        }
+
+    }
+
+    public void rebalance(BinaryNode n) {
+        if(balance(n) < -1){
+            if (balance(n.getLeftChild()) < 0){
+                rightRotate(n);
+            }
+            else{
+                leftRotate(n.getLeftChild());
+                rightRotate(n);
+            }
+        }
+        else if (balance(n) > 1){
+            if (balance(n.getRightChild()) < 0){
+                rightRotate(n.getRightChild());
+                leftRotate(n);
+            }
+            else{
+                leftRotate(n);
+            }
+        }
+
+    }
+
+    private int balance(BinaryNode n){
+        if(n == null || (!n.hasRightChild() && !n.hasLeftChild())){
+            return 0;
+        }
+        else if(!n.hasLeftChild()){
+            return n.getRightChild().getHeight() - 1;
+        }
+        else if(!n.hasRightChild()){
+            return n.getLeftChild().getHeight() - 1;
+        }
+        else{
+            return n.getRightChild().getHeight() - n.getLeftChild().getHeight();
+        }
+    }
+
+    public void rightRotate(BinaryNode y){
+        BinaryNode x = y.getLeftChild();
+        y.setLeftChild(x.getRightChild());
+        if(x.getRightChild() != null){
+            x.getRightChild().setParent(y);
+        }
+        if(y.getParent() != null){
+            x.setParent(y.getParent());
+            if(y.getParent().getLeftChild().equals(y)){
+                y.getParent().setLeftChild(x);
+            }
+            else{
+                y.getParent().setRightChild(x);
+            }
+        }
+        else{
+            x.setParent(null);
+        }
+        x.setRightChild(y);
+        y.setParent(x);
+
+        if(getRootNode().equals(y)){
+            setRootNode(x);
+        }
+    }
+
+    public void leftRotate(BinaryNode x) {
+        BinaryNode y = x.getRightChild();
+        x.setRightChild(y.getLeftChild());
+        if (y.getLeftChild() != null) {
+            y.getLeftChild().setParent(x);
+        }
+        if (x.getParent().equals(null)) {
+            y.setParent(null);
+        } else {
+            y.setParent(x.getParent());
+            if (x.getParent().getLeftChild().equals(x)) {
+                x.getParent().setLeftChild(y);
+            } else {
+                x.getParent().setRightChild(y);
+            }
+        }
+        y.setLeftChild(x);
+        x.setParent(y);
+
+        if (getRootNode().equals(x)) {
+            setRootNode(y);
+        }
+    }
+
+
+
+
+
 
     // Removes the entry in a given root node of a subtree.
     // rootNode is the root node of the subtree.
