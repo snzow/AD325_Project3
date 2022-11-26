@@ -151,10 +151,10 @@ public class BinarySearchTree<T extends Comparable<? super T>>
     } // end removeEntry
 
     public void avlInsert(T w){
-        if(getRootNode().equals(null)){
+        if(getRootNode() == null){
             setRootNode(new BinaryNode(w));
         }
-        else if(findEntry(getRootNode(),w).equals(null)){
+        else if(findEntry(getRootNode(),w) == null){
             avlInsert(getRootNode(), w);
         }
     }
@@ -175,7 +175,7 @@ public class BinarySearchTree<T extends Comparable<? super T>>
                 rebalance(n);
             }
             else{
-                avlInsert(n,w);
+                avlInsert(n.getRightChild(),w);
                 rebalance(n.getRightChild());
             }
         }
@@ -183,8 +183,8 @@ public class BinarySearchTree<T extends Comparable<? super T>>
     }
 
     public void rebalance(BinaryNode n) {
-        if(balance(n) < -1){
-            if (balance(n.getLeftChild()) < 0){
+        if(getBalance(n) < -1){
+            if (getBalance(n.getLeftChild()) <= 0){
                 rightRotate(n);
             }
             else{
@@ -192,8 +192,8 @@ public class BinarySearchTree<T extends Comparable<? super T>>
                 rightRotate(n);
             }
         }
-        else if (balance(n) > 1){
-            if (balance(n.getRightChild()) < 0){
+        else if (getBalance(n) > 1){
+            if (getBalance(n.getRightChild()) < 0){
                 rightRotate(n.getRightChild());
                 leftRotate(n);
             }
@@ -204,19 +204,23 @@ public class BinarySearchTree<T extends Comparable<? super T>>
 
     }
 
-    private int balance(BinaryNode n){
+    private int getBalance(BinaryNode n){
         if(n == null || (!n.hasRightChild() && !n.hasLeftChild())){
             return 0;
         }
         else if(!n.hasLeftChild()){
-            return n.getRightChild().getHeight() - 1;
+            return  n.getRightChild().getHeight() - 0;
         }
         else if(!n.hasRightChild()){
-            return n.getLeftChild().getHeight() - 1;
+            return 0 - n.getLeftChild().getHeight();
         }
         else{
             return n.getRightChild().getHeight() - n.getLeftChild().getHeight();
         }
+    }
+
+    public int getTreeBalance(){
+        return getBalance(getRootNode());
     }
 
     public void rightRotate(BinaryNode y){
@@ -227,7 +231,7 @@ public class BinarySearchTree<T extends Comparable<? super T>>
         }
         if(y.getParent() != null){
             x.setParent(y.getParent());
-            if(y.getParent().getLeftChild().equals(y)){
+            if(y.getParent().getLeftChild() == y){
                 y.getParent().setLeftChild(x);
             }
             else{
@@ -251,11 +255,11 @@ public class BinarySearchTree<T extends Comparable<? super T>>
         if (y.getLeftChild() != null) {
             y.getLeftChild().setParent(x);
         }
-        if (x.getParent().equals(null)) {
+        if (x.getParent() == null) {
             y.setParent(null);
         } else {
             y.setParent(x.getParent());
-            if (x.getParent().getLeftChild().equals(x)) {
+            if (x.getParent().getLeftChild() == x) {
                 x.getParent().setLeftChild(y);
             } else {
                 x.getParent().setRightChild(y);

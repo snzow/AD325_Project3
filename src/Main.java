@@ -6,5 +6,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Parser parser = new Parser();
         parser.initializeReservedWords();
+        System.out.println(parser.getReservedWordsBalance());
+        parser.getIdentifiers();
     }
 }
