@@ -9,6 +9,7 @@ package tree;
 public class BinaryNode<T>
 {
     private T             data;
+    private int height;
 
     private BinaryNode<T> parent; // reference to parent
     private BinaryNode<T> leftChild;  // Reference to left child
@@ -50,10 +51,18 @@ public class BinaryNode<T>
         data = newData;
     } // end setData
 
+    /**
+     * retrieves the parent of this node
+     * @return the node that is the parent of this node
+     */
     public BinaryNode<T> getParent(){
         return parent;
     }
 
+    /**
+     * sets the parent for this node
+     * @param n the node to assign as parent
+     */
     public void setParent(BinaryNode<T> n){
         parent = n;
     }
@@ -120,13 +129,6 @@ public class BinaryNode<T>
         return 1 + leftNumber + rightNumber;
     } // end getNumberOfNodes
 
-    /** Computes the height of the subtree rooted at this node.
-     @return  The height of the subtree rooted at this node. */
-    public int getHeight()
-    {
-        return getHeight(this); // Call private getHeight
-    } // end getHeight
-
     /** Copies the subtree rooted at this node.
      @return  The root of a copy of the subtree rooted at this node. */
     public BinaryNode<T> copy()
@@ -141,12 +143,36 @@ public class BinaryNode<T>
         return newRoot;
     } // end copy
 
-    private int getHeight(BinaryNode<T> node)
-    {
-        int height = 0;
-        if (node != null)
-            height = 1 + Math.max(getHeight(node.getLeftChild()),
-                    getHeight(node.getRightChild()));
-        return height;
-    } // end getHeight
+    /**gets the height of a given node
+     *
+     * @param n the node to find the height of
+     * @return the height of the node
+     */
+    public static int getHeight(BinaryNode n){
+        if (n == null){
+            return -1;
+        }
+        else{
+            return 1 + Math.max(getHeight(n.getLeftChild()),getHeight(n.getRightChild()));
+        }
+    }
+
+    /**
+     * updates the height of this node and every node above it in the tree
+     */
+    public void updateHeight(){
+        BinaryNode toUpdate = this;
+        while(toUpdate != null){
+            toUpdate.setHeight(1 + Math.max(BinaryNode.getHeight(toUpdate.getLeftChild()),BinaryNode.getHeight(toUpdate.getRightChild())));
+            toUpdate = toUpdate.getParent();
+        }
+    }
+
+    /**
+     * sets the height of this node
+     * @param q the new height value
+     */
+    private void setHeight(int q){
+        height = q;
+    }
 } // end BinaryNode

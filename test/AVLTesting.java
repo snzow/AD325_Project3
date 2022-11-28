@@ -25,6 +25,8 @@ public class AVLTesting {
         assert(test.getTreeBalance() == 1);
         test.avlInsert("c");
         test.avlInsert("d");
+        test.avlInsert("e");
+        test.avlInsert("f");
 
 
     }

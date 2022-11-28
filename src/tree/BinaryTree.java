@@ -86,14 +86,6 @@ public class BinaryTree<T> implements BinaryTreeInterface<T>
         root = null;
     } // end clear
 
-    public int getHeight()
-    {
-        int height = 0;
-        if (root != null)
-            height = root.getHeight();
-        return height;
-    } // end getHeight
-
     public int getNumberOfNodes()
     {
         int numberOfNodes = 0;

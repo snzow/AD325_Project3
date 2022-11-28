@@ -23,8 +23,13 @@ public class Parser {
         reservedWordsArrayList = new ArrayList<>();
     }
 
+    /**
+     * initializes the reserved words list, adding the words to an avl tree
+     * @throws IOException if there is no reservedWords.txt
+     */
     public void initializeReservedWords() throws IOException {
-        BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\Aodhan\\IdeaProjects\\AD325_Project3\\src\\reservedWords.txt"));
+        InputStream in = this.getClass().getClassLoader().getResourceAsStream("reservedWords.txt");
+        BufferedReader br = new BufferedReader(new InputStreamReader(in));
         String nextLine = br.readLine();
         while(nextLine != null){
             reservedWordsArrayList.add(nextLine);
@@ -33,28 +38,34 @@ public class Parser {
         for (String t : reservedWordsArrayList){
             setBalancedBST(t,reservedWordsBST);
         }
+        in.close();
 
     }
 
+    /**
+     * adds values to an avl tree
+     * @param toAdd the string to add to the tree
+     * @param tree the tree to add them to
+     */
     public void setBalancedBST(String toAdd, BinarySearchTree tree){
-        System.out.println(toAdd);
         tree.avlInsert(toAdd);
-        System.out.println(toAdd + " has been added to the reserved words AVL tree");
 
     }
 
-    public int getReservedWordsBalance(){
-        return reservedWordsBST.getTreeBalance();
-    }
-
-    public void getIdentifiers(){
+    /**
+     * scans through a file and puts all non-reserved identifiers into an avl tree
+     * @throws IOException if there is no Palindrome.java
+     */
+    public void getIdentifiers() throws IOException {
         String[] words;
-        try (BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\Aodhan\\IdeaProjects\\AD325_Project3\\src\\Palindrome.java"));){
+        try (BufferedReader br = new BufferedReader(new FileReader("src/Palindrome.java"))){
             String nextLine = br.readLine();
             while(nextLine != null){
-                words = nextLine.split("[\\s;{}()\\]\\[+=><-]");
+                words = nextLine.split("[\\s;{}()\\]\\[+=>.<-]");
                 for(int i = 0; i < words.length; i++){
-                    identifiersArrayList.add(words[i]);
+                    if(words[i] != null){
+                        identifiersArrayList.add(words[i]);
+                    }
                 }
                 nextLine = br.readLine();
             }
@@ -65,23 +76,14 @@ public class Parser {
             if(s == ""){
                 continue;
             }
-            if (reservedWordsBST.getEntry(s) != null) {
-                System.out.println(s + " is a reserved word");
-            }
-            else{
-
-                if(identifiersBST.getEntry(s) != null){
-                    System.out.println(s + " is already contained in tree");
-
-                }
-                else{
-                    System.out.println(s + " has been added to identifiers");
+            if (reservedWordsBST.getEntry(s) == null) {
+                if (identifiersBST.getEntry(s) == null) {
                     identifiersBST.avlInsert(s);
                 }
             }
 
-        }
 
+        }
     }
 
 
