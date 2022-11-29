@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f428e5b0-2797-44ba-a80e-cb5846db62b2" name="Changes" comment="complete">
+    <list default="true" id="f428e5b0-2797-44ba-a80e-cb5846db62b2" name="Changes" comment="complete + one more method">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Parser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tree/BinaryNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tree/BinaryNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tree/BinarySearchTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tree/BinarySearchTree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tree/BinaryTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tree/BinaryTree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tree/TreeInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tree/TreeInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/AVLTesting.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/AVLTesting.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/AVLTesting.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,7 +105,11 @@
       <workItem from="1669230505016" duration="1860000" />
       <workItem from="1669422280912" duration="5489000" />
       <workItem from="1669484922408" duration="7963000" />
-      <workItem from="1669575556530" duration="9124000" />
+      <workItem from="1669575556530" duration="9489000" />
+      <workItem from="1669623711878" duration="654000" />
+      <workItem from="1669675625434" duration="680000" />
+      <workItem from="1669715773354" duration="598000" />
+      <workItem from="1669738261552" duration="623000" />
     </task>
     <task id="LOCAL-00001" summary="tree is now an avl tree">
       <created>1669427703366</created>
@@ -120,7 +118,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669427703366</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="complete + one more method">
+      <created>1669600329137</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1669600329137</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -140,6 +145,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="tree is now an avl tree" />
     <MESSAGE value="complete" />
-    <option name="LAST_COMMIT_MESSAGE" value="complete" />
+    <MESSAGE value="complete + one more method" />
+    <option name="LAST_COMMIT_MESSAGE" value="complete + one more method" />
   </component>
 </project>
